@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+:root {
+  --canvas: #0b0e14;
+  --canvas-deep: #07090e;
+  --surface-card: #141926;
+  --surface-raised: #1b2130;
+  --signal-white: #f5f6f8;
+  --signal-muted: #9aa0ae;
+  --pass-green: #3ddc97;
+  --watch-amber: #f5b841;
+  --block-coral: #ff5a5f;
+  --judge-indigo: #6c8cff;
+
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 400ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-inout: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-canvas-deep: var(--canvas-deep);
+  --color-surface-card: var(--surface-card);
+  --color-surface-raised: var(--surface-raised);
+  --color-signal-white: var(--signal-white);
+  --color-signal-muted: var(--signal-muted);
+  --color-pass: var(--pass-green);
+  --color-watch: var(--watch-amber);
+  --color-block: var(--block-coral);
+  --color-judge: var(--judge-indigo);
+
+  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+
+  --text-hero: 2.5rem;
+  --text-title: 0.9375rem;
+  --text-body: 0.9375rem;
+  --text-caption: 0.6875rem;
+
+  --animate-pulse-once: pulse-ring var(--dur-slow) var(--ease-out) 1;
+  --animate-shake-once: shake var(--dur-fast) var(--ease-inout) 1;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 90, 95, 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 14px rgba(255, 90, 95, 0);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  background: var(--canvas);
+  color: var(--signal-white);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--block-coral);
+  color: var(--canvas-deep);
+}
+
+:focus-visible {
+  outline: 2px solid var(--block-coral);
+  outline-offset: 2px;
+}
+
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.fade-up-enter {
+  animation: fade-up var(--dur-slow) var(--ease-out) both;
+}
+
+.rail-scroll {
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rail-scroll > * {
+  scroll-snap-align: start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
