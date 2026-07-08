@@ -2,6 +2,25 @@ import { requireOrgContext, orgContextErrorResponse } from "@/lib/auth/org-conte
 import { recordAudit } from "@/lib/audit";
 import { createProjectVersionSchema } from "@/lib/validation/projects";
 
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const { id: projectId } = await params;
+    const ctx = await requireOrgContext("viewer");
+
+    const { data, error } = await ctx.supabase
+      .from("project_versions")
+      .select("*")
+      .eq("org_id", ctx.orgId)
+      .eq("project_id", projectId)
+      .order("created_at", { ascending: false });
+    if (error) throw error;
+
+    return Response.json({ versions: data });
+  } catch (error) {
+    return orgContextErrorResponse(error);
+  }
+}
+
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id: projectId } = await params;

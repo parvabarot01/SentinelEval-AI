@@ -50,7 +50,7 @@ export default async function SuiteDetailPage({ params }: { params: Promise<{ id
         <h2 className="text-sm font-medium text-signal-muted">Criteria ({list.length})</h2>
         {list.length === 0 ? (
           <div className="rounded-lg border border-dashed border-white/10 bg-surface-card/40 px-6 py-8 text-center text-sm text-signal-muted">
-            No criteria yet. Add one above to define what "pass" means for this suite.
+            No criteria yet. Add one above to define what &quot;pass&quot; means for this suite.
           </div>
         ) : (
           <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">

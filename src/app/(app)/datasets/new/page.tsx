@@ -46,7 +46,7 @@ export default function NewDatasetPage() {
   return (
     <div className="mx-auto max-w-lg">
       <h1 className="font-display text-2xl font-medium text-signal-white">Create a dataset</h1>
-      <p className="mt-1 text-sm text-signal-muted">Starts at version 1 — add test cases once it's created.</p>
+      <p className="mt-1 text-sm text-signal-muted">Starts at version 1 — add test cases once it&apos;s created.</p>
       <form onSubmit={onSubmit} className="mt-6 flex flex-col gap-4">
         <Field label="Dataset name" type="text" value={name} onChange={setName} required />
         <label className="flex flex-col gap-1.5 text-sm">

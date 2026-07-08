@@ -39,7 +39,7 @@ export default function NewFeaturePage() {
     <div className="mx-auto max-w-lg">
       <h1 className="font-display text-2xl font-medium text-signal-white">Register a feature</h1>
       <p className="mt-1 text-sm text-signal-muted">
-        A feature is an LLM-powered capability under test — e.g. "support triage" or "invoice summarizer."
+        A feature is an LLM-powered capability under test — e.g. &quot;support triage&quot; or &quot;invoice summarizer.&quot;
       </p>
       <form onSubmit={onSubmit} className="mt-6 flex flex-col gap-4">
         <Field label="Feature name" type="text" value={name} onChange={setName} required />

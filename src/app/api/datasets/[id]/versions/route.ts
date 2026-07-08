@@ -2,6 +2,25 @@ import { requireOrgContext, orgContextErrorResponse } from "@/lib/auth/org-conte
 import { recordAudit } from "@/lib/audit";
 import { createDatasetVersionSchema } from "@/lib/validation/datasets";
 
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const { id: datasetId } = await params;
+    const ctx = await requireOrgContext("viewer");
+
+    const { data, error } = await ctx.supabase
+      .from("dataset_versions")
+      .select("*")
+      .eq("org_id", ctx.orgId)
+      .eq("dataset_id", datasetId)
+      .order("version_number", { ascending: false });
+    if (error) throw error;
+
+    return Response.json({ versions: data });
+  } catch (error) {
+    return orgContextErrorResponse(error);
+  }
+}
+
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id: datasetId } = await params;

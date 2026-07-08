@@ -196,6 +196,25 @@ export interface Promotion {
   decided_at: string | null;
 }
 
+export interface EvalRunSummary {
+  run_id: string;
+  org_id: string;
+  project_id: string;
+  project_version_id: string;
+  suite_id: string;
+  dataset_version_id: string;
+  status: RunStatus;
+  triggered_by: string | null;
+  created_at: string;
+  completed_at: string | null;
+  total_cases: number;
+  pass_count: number;
+  watch_count: number;
+  block_count: number;
+  pending_count: number;
+  avg_score: number | null;
+}
+
 export interface AuditLogEntry {
   id: string;
   org_id: string;

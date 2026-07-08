@@ -31,7 +31,7 @@ export default async function SuitesPage() {
 
       {list.length === 0 ? (
         <div className="rounded-lg border border-dashed border-white/10 bg-surface-card/40 px-6 py-12 text-center text-sm text-signal-muted">
-          No suites yet. Create one, then add criteria like "factual accuracy" or "correct refusal."
+          No suites yet. Create one, then add criteria like &quot;factual accuracy&quot; or &quot;correct refusal.&quot;
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

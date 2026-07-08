@@ -22,11 +22,6 @@ export function VerdictGauge({ score, label }: VerdictGaugeProps) {
   const verdict = verdictFromScore(score);
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) {
-      setWidth(score * 100);
-      return;
-    }
     const raf = requestAnimationFrame(() => setWidth(score * 100));
     return () => cancelAnimationFrame(raf);
   }, [score]);
