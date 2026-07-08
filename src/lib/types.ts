@@ -215,6 +215,18 @@ export interface EvalRunSummary {
   avg_score: number | null;
 }
 
+export interface ApiKey {
+  id: string;
+  org_id: string;
+  name: string;
+  key_hash: string;
+  key_prefix: string;
+  created_at: string;
+  created_by: string | null;
+  last_used_at: string | null;
+  revoked_at: string | null;
+}
+
 export interface AuditLogEntry {
   id: string;
   org_id: string;
