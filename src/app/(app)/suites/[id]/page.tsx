@@ -3,7 +3,8 @@ import { createClient } from "@/lib/supabase/server";
 import { getCurrentOrg } from "@/lib/current-org";
 import { AddRubricForm } from "./AddRubricForm";
 import { LinkButton } from "@/components/ui/Button";
-import type { EvalSuite, Rubric } from "@/lib/types";
+import { TrendLine } from "@/components/ui/TrendLine";
+import type { EvalSuite, Rubric, EvalRunSummary } from "@/lib/types";
 
 const CRITERION_LABEL: Record<Rubric["criterion_type"], string> = {
   llm_judge: "LLM judge",
@@ -34,6 +35,20 @@ export default async function SuiteDetailPage({ params }: { params: Promise<{ id
 
   const list = rubrics ?? [];
 
+  const { data: runHistory } = await supabase
+    .from("eval_run_summary")
+    .select("*")
+    .eq("suite_id", id)
+    .eq("status", "completed")
+    .not("avg_score", "is", null)
+    .order("created_at", { ascending: true })
+    .returns<EvalRunSummary[]>();
+
+  const trendPoints = (runHistory ?? []).map((run) => ({
+    score: run.avg_score!,
+    label: new Date(run.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric" }),
+  }));
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
@@ -43,6 +58,13 @@ export default async function SuiteDetailPage({ params }: { params: Promise<{ id
         </div>
         {list.length > 0 && <LinkButton href={`/runs/new?suite=${suite.id}`}>Run this suite</LinkButton>}
       </div>
+
+      {trendPoints.length > 1 && (
+        <div className="rounded-lg border border-white/5 bg-surface-card p-4">
+          <h2 className="mb-2 text-sm font-medium text-signal-muted">Score trend across runs</h2>
+          <TrendLine points={trendPoints} />
+        </div>
+      )}
 
       <AddRubricForm suiteId={id} />
 

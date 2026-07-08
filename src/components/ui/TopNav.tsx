@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { href: "/features", label: "Features" },
   { href: "/suites", label: "Suites" },
   { href: "/runs", label: "Runs" },
+  { href: "/review", label: "Review" },
   { href: "/guardrails", label: "Guardrails" },
   { href: "/governance", label: "Governance" },
 ];
