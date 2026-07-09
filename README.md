@@ -34,6 +34,14 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Deploying
+
+CI (`.github/workflows/ci.yml`) runs lint, type check, and build on every push/PR — no secrets required. To deploy:
+
+1. Run the SQL in `supabase/migrations/` (in order) against a Supabase project.
+2. Set every variable in `.env.local.example` in your hosting provider's environment settings.
+3. Connect the repo to Vercel (or any Next.js host) — no `vercel.json` is needed, Vercel auto-detects the Next.js app.
+
 ## Project docs
 
 - `PRD.md`, `PERSONAS.md`, `COMPETITIVE_ANALYSIS.md`
